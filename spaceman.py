@@ -1,5 +1,9 @@
 import random
 
+print('----------------------------------------------')
+print('              SPACEMAN WORD GAME')
+print('----------------------------------------------')
+
 def load_words():
     f = open('words.txt', r)
     word_list = f.readlines()
@@ -30,11 +34,23 @@ def get_guessed_word(secretWord, lettersGuessed):
     in the word that the user has not yet guessed, shown an _ (underscore) instead.
     '''
     guessedWord = ''
+    matches = 0
+    match = ''
     for letter in secretWord:
         if letter in lettersGuessed:
             guessedWord += letter
+            matches += 1
+            match += letter
         else:
             guessedWord += '_'
+
+    if matches > 1:
+        print(f'''Congrats! The word contains {matches} matches''')
+    elif matches == 1:
+        print(f'''Congrats! The word contains the letter {match}.''')
+    else:
+        print(f'''Error! The word does not contain the letter you entered.''')
+
     return guessedWord
 
 def get_available_letters(lettersGuessed):

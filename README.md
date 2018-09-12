@@ -9,3 +9,7 @@ Spaceman is a guessing game. There is a mystery word which the user tries to gue
 + If a player guesses all the letters in the word, they win the game.
 + For each incorrect guess a part of the Spaceman (a 7 part drawing of a Spaceman) is drawn.
 + If all 7 parts of the Spaceman are drawn then the player loses the game.
+
+## Guide
++ Clone this repository to your computer and CD into it: ``` $ cd spaceman ```
++ To start game: ``` $ python spaceman.py ```
