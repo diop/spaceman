@@ -5,7 +5,7 @@ print('              SPACEMAN WORD GAME')
 print('----------------------------------------------')
 
 def load_words():
-    f = open('words.txt', r)
+    f = open('spaceman_words.txt', mode = 'r')
     word_list = f.readlines()
     f.close()
 
@@ -45,11 +45,11 @@ def get_guessed_word(secretWord, lettersGuessed):
             guessedWord += '_'
 
     if matches > 1:
-        print(f'''Congrats! The word contains {matches} matches''')
+        print(f'Congrats! The word contains {matches} matches')
     elif matches == 1:
-        print(f'''Congrats! The word contains the letter {match}.''')
+        print(f'Congrats! The word contains the letter {match}.')
     else:
-        print(f'''Error! The word does not contain the letter you entered.''')
+        print(f'Error! The word does not contain the letter you entered.')
 
     return guessedWord
 
@@ -59,8 +59,12 @@ def get_available_letters(lettersGuessed):
     returns: string, comprised of letters that represents what letters have not
       yet been guessed.
     '''
+    letters_choices = ['A', 'B','C', 'D', 'E', 'F', 'G', 'H', 'J', 'K', 'L', 'M', 'N', 'O', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
+    print(letters_choices)
     for letter in lettersGuessed:
-        #
+        if letter in letters_choices:
+            letters_choices.remove(letter)
+    return letters_choices
 
 def spaceman(secretWord):
     '''
@@ -75,6 +79,22 @@ def spaceman(secretWord):
       partially guessed word so far, as well as letters that the
       user has not yet guessed.
     '''
-
-# secret_word = load_word()
-# spaceman(load_word())
+    word_length = len(secretWord)
+    letters_guessed = []
+    print('Please enter your name: ')
+    name = input(':> ')
+    print(f'Hi {name}! Welcome to Spaceman Word Game. The word to guess contains {word_length} letters. Good luck!')
+    while not is_word_guessed(secret_word, letters_guessed):
+        print('Guess a letter in the word.')
+        guess = input(':> ').upper()
+        if guess not in letters_guessed:
+            letters_guessed.append(guess)
+            available_letters = get_available_letters(letters_guessed)
+            print(f'Letters you have not yet used: {available_letters}')
+            print(f'Your word status: {get_guessed_word(secret_word, letters_guessed)}')
+        else:
+            print(f'You have already used that letter. Pick another one!')
+    else:
+        print(f'You guessed the word: {secret_word}!!! ')
+secret_word = load_words()
+spaceman(load_words())
